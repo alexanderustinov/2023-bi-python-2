@@ -25,5 +25,5 @@ while True:
 
     data = [regular_polyhedron, cube, tetrahedron, octahedron]
 
-    client.send(pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL))
+    client.send(pickle.dumps(data, protocol=pickle.DEFAULT_PROTOCOL))
     client.close()
