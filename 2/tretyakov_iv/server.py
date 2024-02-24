@@ -1,6 +1,6 @@
 import socket
 import logging
-import json
+import pickle
 from classes import Student, Teacher, Guest
 
 from common import ADDR
@@ -30,10 +30,5 @@ while True:
         data1 = Teacher('Igor', 57, "Calculus")
     else:
         data1 = Guest("Neptune", 10000, "Swimming")
-    data = {
-        "name": data1.name,
-        "age": data1.age,
-        "info": str(data1.inf())
-        }
-    client.send(json.dumps(data).encode())
+    client.send(pickle.dumps(data1))
     client.close()
