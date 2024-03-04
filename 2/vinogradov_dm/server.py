@@ -4,7 +4,7 @@ import pickle
 
 from common import ADDR
 from dz import *
-logger = logging.getLogger(name)
+logger = logging.getLogger(__name__)
 logging.basicConfig()
 
 s = socket.socket(socket.AFINET, socket.SOCKSTREAM)
