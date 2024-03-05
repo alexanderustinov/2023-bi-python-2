@@ -20,10 +20,9 @@ async def try_connect(ip, port):
         return port
     finally:
         semaphore.release()
-    
 
 async def main():
-    ip = '192.168.202.5'
+    ip = '127.0.0.1'
     portrange = (1, 65535)
 
     loop = asyncio.get_running_loop()
@@ -35,11 +34,11 @@ async def main():
         result = coroutine.result()
         if result is not None:
             print(result)
-        
+
     for port in range(*portrange):
         coroutines.append(loop.create_task(try_connect(ip, port)))
         coroutines[-1].add_done_callback(callback)
-    
+
     i = 1
     while len(coroutines) > 0:
         print(f'doing things i want - {i}')
