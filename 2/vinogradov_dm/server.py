@@ -20,7 +20,7 @@ while True:
         client_socket = s.accept()
     except TimeoutError:
         continue
-    client, (addr, port) = clientsocket
+    client, (addr, port) = client_socket
     logger.warning(f"{addr} connected from port {port}")
 
     data = [Fr, Ci, B]
