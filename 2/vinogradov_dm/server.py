@@ -17,7 +17,7 @@ s.settimeout(1)
 
 while True:
     try:
-        clientsocket, addr = s.accept()
+        client_socket = s.accept()
     except TimeoutError:
         continue
     client, (addr, port) = clientsocket
@@ -26,5 +26,4 @@ while True:
     data = {Fr, Ci, B}
 
     client.send(pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL))
-
     client.close()
