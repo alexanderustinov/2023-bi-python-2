@@ -1,22 +1,14 @@
 import socket
-import json
+import pickle
 
 from common import ADDR
-from classes_5 import Customer, Product
+from classes_5 import Customer, Product, ShoppingCartItem
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect(ADDR)
-data = s.recv(4096).decode()
+data = s.recv(4096)
 
-
-customer_data = json.loads(data)
-customer = Customer(customer_data['name'])
-
-
-for item_data in customer_data['cart']:
-    product = Product(item_data['name'], item_data['price'])
-    customer.add_to_cart(product, item_data['quantity'])
-
+customer = pickle.loads(data)
 
 customer.view_cart()
 s.close()
