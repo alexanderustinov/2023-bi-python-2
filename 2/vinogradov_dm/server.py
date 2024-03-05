@@ -23,7 +23,7 @@ while True:
     client, (addr, port) = clientsocket
     logger.warning(f"{addr} connected from port {port}")
 
-    data = {Fr, Ci, B}
+    data = [Fr, Ci, B]
 
     client.send(pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL))
     client.close()
