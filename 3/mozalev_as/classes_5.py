@@ -20,11 +20,8 @@ class ShoppingCartItem(Product):
         discounted_price = self.calculate_discounted_price(discount)
         total_price = discounted_price * self.quantity
         return total_price
-    
+
     def __str__(self):
-        return f"Товар: {self.name}, Количество: {self.quantity}, Общая цена: {self.calculate_total_price(0)}"
-    
-    def to_str(self):
         return f"Товар: {self.name}, Количество: {self.quantity}, Общая цена: {self.calculate_total_price(0)}"
 
 
@@ -38,10 +35,6 @@ class Customer:
         self.cart.append(cart_item)
 
     def view_cart(self):
-        #(f"Корзина {self.name}:")
-        items = ""
+        print(f"Корзина {self.name}:")
         for item in self.cart:
-            #print(item)
-            items=items+item.to_str()+"\n"
-        return items
-            
+            print(item)

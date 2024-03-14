@@ -1,5 +1,5 @@
 import asyncio
-
+import pickle
 class EchoClientProtocol(asyncio.Protocol):
     def __init__(self, message, on_con_lost):
         self.message = message
@@ -10,7 +10,9 @@ class EchoClientProtocol(asyncio.Protocol):
         print(f'Клиент сказал: {self.message}')
 
     def data_received(self, data):
-        print(f'Сервер ответил: {data.decode()}')
+        #print(f'Сервер ответил: {data.decode()}')
+        customer = pickle.loads(data)
+        customer.view_cart()
 
     def connection_lost(self, exc):
         print('The server closed the connection')

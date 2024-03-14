@@ -1,6 +1,7 @@
 import asyncio
 from classes_5 import Customer, Product
 import random
+import pickle
 
 def try_use_classes():
     product1 = Product("Футболка", 500)
@@ -12,7 +13,7 @@ def try_use_classes():
     customer = Customer("Иван")
     customer.add_to_cart(product1, quantity1)
     customer.add_to_cart(product2, quantity2)
-    return customer.view_cart()
+    return customer
 
 class EchoServerProtocol(asyncio.Protocol):
     def connection_made(self, transport):
@@ -24,9 +25,11 @@ class EchoServerProtocol(asyncio.Protocol):
         message = data.decode()
         print('Клиент сказал: {}'.format(message))
         
-        answer = try_use_classes()
-        print('Сервер ответил: {}'.format(answer))
-        self.transport.write(answer.encode())
+        customer = try_use_classes()
+        answer = pickle.dumps(customer)
+        #print('Сервер ответил: {}'.format(answer))
+        print('Сервер ответил')
+        self.transport.write(answer)
 
         print('Close the client socket')
         self.transport.close()
