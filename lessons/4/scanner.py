@@ -42,7 +42,7 @@ async def main():
     i = 1
     while len(coroutines) > 0:
         print(f'doing things i want - {i}')
-        i += 1
+        i+=1
         await asyncio.sleep(1)
 
 asyncio.run(main())
