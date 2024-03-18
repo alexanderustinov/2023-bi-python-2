@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import pickle
 from common import ADDR
 
 logger = logging.getLogger(__name__)
@@ -16,8 +17,8 @@ class EchoServerProtocol(asyncio.Protocol):
         message = data.decode()
         print('Data received: {!r}'.format(message))
 
-        print('Send: {!r}'.format(message))
-        self.transport.write(data)
+        print('Send: {!r}'.format(message.inf()))
+        self.transport.write(pickle.loads(data).inf().encode())
 
         print('Close the client socket')
         self.transport.close()
