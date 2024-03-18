@@ -1,38 +1,29 @@
-import asyncio
-import logging
 import pickle
+import logging
+import asyncio
+
+from classes import Stars, Planets
 from common import ADDR
 
 logger = logging.getLogger(__name__)
-logging.basicConfig()
+logging.basicConfig(level=logging.INFO)
 
 
-class EchoServerProtocol(asyncio.Protocol):
-    def connection_made(self, transport):
-        peername = transport.get_extra_info('peername')
-        print('Connection from {}'.format(peername))
-        self.transport = transport
-
-    def data_received(self, data):
-        message = data.decode()
-        print('Data received: {!r}'.format(message))
-
-        print('Send: {!r}'.format(message.inf()))
-        self.transport.write(pickle.loads(data).inf().encode())
-
-        print('Close the client socket')
-        self.transport.close()
+async def server_handler(reader, writer):
+    logger.info('Connected')
+    data = [Stars, Planets]
+    writer.write(pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL))
+    await writer.drain()
+    logger.info('Sent')
 
 
-async def main():
-    loop = asyncio.get_running_loop()
-
-    server = await loop.create_server(
-        lambda: EchoServerProtocol(),
-        ADDR[0], ADDR[1])
+async def main_server():
+    print(ADDR[0], ADDR[1])
+    server = await asyncio.start_server(server_handler, ADDR[0], ADDR[1])
 
     async with server:
         await server.serve_forever()
 
 
-asyncio.run(main())
+if __name__ == '__main__':
+    asyncio.run(main_server())
