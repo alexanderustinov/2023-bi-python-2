@@ -1,9 +1,7 @@
 from common import AD,DR
 import asyncio
 import pickle
-class Fr:
-    def __init__(self, message):
-        self.message = message
+from dz import *
 class EchoClientProtocol(asyncio.Protocol):
     def __init__(self, message, on_con_lost):
         self.message = message
@@ -23,7 +21,7 @@ class EchoClientProtocol(asyncio.Protocol):
 async def main():
     loop = asyncio.get_event_loop()
     on_con_lost = loop.create_future()
-    data1 = Fr('Мандаринчики')
+    data1 = Ci("апельсин", "оранжевый", "сладкий", 8)
     data = pickle.dumps(data1)
 
     transport, protocol = await loop.create_connection(
