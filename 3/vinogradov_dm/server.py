@@ -17,8 +17,8 @@ class EchoServerProtocol(asyncio.Protocol):
         message = pickle.loads(data)
         print('Data received: {!r}'.format(message))
 
-        print('Send: {!r}'.format(message.inf()))
-        self.transport.write(pickle.loads(data).inf().encode())
+        print('Send: {!r}'.format(message.des()))
+        self.transport.write(pickle.loads(data).des().encode())
 
         print('Close the client socket')
         self.transport.close()
