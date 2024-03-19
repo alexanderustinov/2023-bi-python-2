@@ -1,4 +1,5 @@
 import asyncio
+import pickle
 
 from common import AAA
 from penguin import *
@@ -8,10 +9,13 @@ class EchoServerProtocol:
         self.transport = transport
 
     def datagram_received(self, data, addr):
-        message = data.decode()
+        message = pickle.loads(data)
         print('Received %r from %s' % (message, addr))
-        print('Send %r to %s' % (message, addr))
-        self.transport.sendto(data, addr)
+        print('Send %r to %s' % (message.swim(), addr))
+        self.transport.sendto(pickle.loads(data).swim().encode(), addr)
+
+        print("I'm closing?")
+        self.transport.close()
 
 async def main():
     print("Hiiiii! I'm starting.")
@@ -22,15 +26,9 @@ async def main():
         local_addr = AAA)
 
     try:
-        await asyncio.sleep(120)
+        await asyncio.sleep(60)
     finally:
         transport.close()
 
 
 asyncio.run(main())
-
-
-
-
-
-

@@ -1,4 +1,5 @@
 import asyncio
+import pickle
 
 from common import AAA
 from penguin import *
@@ -12,13 +13,10 @@ class EchoClientProtocol:
     def connection_made(self, transport):
         self.transport = transport
         print(self.message)
-        self.transport.sendto(self.message.encode())
+        self.transport.sendto(pickle.dumps(self.message))
 
     def datagram_received(self, data, addr):
-        print("Received:", data.decode())
-
-        print("I'm closing?")
-        self.transport.close()
+        print("Received: {!r}".format(data))
 
     def error_received(self, exc):
         print('Error received:', exc)
@@ -27,25 +25,23 @@ class EchoClientProtocol:
         print("Bye-Bye :(")
         self.on_con_lost.set_result(True)
 
-
 async def main():
     loop = asyncio.get_running_loop()
 
     on_con_lost = loop.create_future()
+    message = 'Let`s go!'
 
-    server = await loop.create_server(
-        lambda: EchoServerProtocol(),
-        aaaa = ('127.0.0.1', 3333))
+    r = randint(0, 20)
+    if r % 2 == 0:
+        bird = Penguin('Emperor Penguin', '130', '25', '35', '40')
+    else:
+        bird = Penguin('Rockhopper Penguin', '60', '25', '2', '3')
 
+    data = pickle.dumps(bird)
 
-async def main():
-    loop = asyncio.get_running_loop()
-
-    on_con_lost = loop.create_future()
-    message = bird.swim()
 
     transport, protocol = await loop.create_datagram_endpoint(
-        lambda: EchoClientProtocol(message, on_con_lost),
+        lambda: EchoClientProtocol(bird, on_con_lost),
         remote_addr=AAA)
 
     try:
@@ -54,3 +50,5 @@ async def main():
         transport.close()
 
 asyncio.run(main())
+
+
