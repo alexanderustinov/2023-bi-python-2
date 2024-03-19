@@ -1,38 +1,27 @@
 import logging
+import pickle
 from common import ADDR
+import asyncio
+from classesdz5 import regular_polyhedron, cube, tetrahedron, octahedron
 
 logger = logging.getLogger(__name__)
 logging.basicConfig()
 
-import asyncio
+async def server_handler(reader, writer):
+    logger.info('Connected')
+    data = [regular_polyhedron, cube, tetrahedron, octahedron]
+    writer.write(pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL))
+    await writer.drain()
+    logger.info('Sent')
 
 
-class EchoServerProtocol(asyncio.Protocol):
-    def connection_made(self, transport):
-        peername = transport.get_extra_info('peername')
-        print('Connection from {}'.format(peername))
-        self.transport = transport
-
-    def data_received(self, data):
-        message = data.decode()
-        print('Data received: {!r}'.format(message))
-
-        print('Send: {!r}'.format(message))
-        self.transport.write(data)
-
-        print('Close the client socket')
-        self.transport.close()
-
-
-async def main():
-    loop = asyncio.get_running_loop()
-
-    server = await loop.create_server(
-        lambda: EchoServerProtocol(),
-        ADDR[0], ADDR[1])
+async def main_server():
+    print(ADDR[0], ADDR[1])
+    server = await asyncio.start_server(server_handler, ADDR[0], ADDR[1])
 
     async with server:
         await server.serve_forever()
 
 
-asyncio.run(main())
+if __name__ == '__main__':
+    asyncio.run(main_server())
