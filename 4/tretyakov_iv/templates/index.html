@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Your unreal sequance{% endblock %}
+
+
+{% block body %}
+
+<>Если Вам хочется узнать последовательность натуральных чисел до заданного (включительно), просто введите любое натуральное число большее 0
+
+<form method="POST">
+    <div>
+      <label for="N">Выбери своё прекрасное число N:</label>
+    <input type="number" id="N" name="N" min="1"  required/>
+    <span class="validity"></span>
+    </div>
+    <div>
+      <input type="submit" />
+    </div>
+  </form>
+<p>Последовательность: {{ seq }}</p>
+Еcли вдруг Вы знаете последовательность, то вот хотя бы сумма...
+<p>Сумма: {{ su }}</p>
+{% endblock %}
