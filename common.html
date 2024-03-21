@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Последовательность биномиальных коэффициентов{% endblock %}
+
+{% block body %}
+
+<p>При вводе числа n, благодаря некоторым операциям, вы можете получить треугольник Паскаля до n-ой строки.</p>
+
+<form method="POST">
+    <label for="n">Введите значение n:</label>
+    <input type="number" id="n" name="n" min="1" required>
+    <input type="submit">
+</form>
+
+{% if list %}
+    <p>Биномиальные коэффициенты:</p>
+    <ul>
+        {% for n in list %}
+            <li>{{ n }}</li>
+        {% endfor %}
+{% endif %}
+
+{% endblock %}
