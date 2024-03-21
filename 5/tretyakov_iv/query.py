@@ -13,7 +13,7 @@ with Session(engine) as s:
     print("-"*58)
 
     for r in s.scalars(results_2):
-        print(f"ВВП на душу населения в {r.year} в {'Дели'if(r.city == 'Delhi')else "Лондоне"} превысил 37000$")
+        print(f"ВВП на душу населения в {r.year} в {'Дели'if(r.city == 'Delhi')else 'Лондоне'} превысил 37000$")
 
     print("-"*58)
 
