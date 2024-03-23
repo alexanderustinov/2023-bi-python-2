@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}my bread page{% endblock %}
+
+{% block body %}
+<p>Съешь этих мягких французских булок, да выпей чаю, самое время - {{now.strftime('%y %m %d %H:%M')}}</p>
+<br>У нас есть:<br>
+{% for bread_kind in bread_kinds %}
+    {{bread_kind}}{% if bread_kind=="пончики" %} <-- мои любимые{% endif %}<br>
+{% endfor %}
+<a href="https://spbau.ru/nauka/osnovnyie-nauchnyie-dostizheniya/">spbau.ru</a>
+<a href="/other_page">other_page</a>
+{% endblock %}

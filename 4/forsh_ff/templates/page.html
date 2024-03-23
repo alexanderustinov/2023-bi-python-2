@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Lucas numbers{% endblock %}
+
+{% block body %}
+<div class="alert alert-success" role="alert">
+    <h4>Lucas numbers</h4>
+    <form action="/show_numbers" method="post">
+        <label for="numbers" class="form-label">Enter the number of sequence elements</label>
+        <hr>
+        <input type="int" class="form-control" id="numbers" name="numbers" placeholder="for example write 10">
+    </form>
+    <div>
+        <p>
+            {{ warning }}
+        </p>
+    </div>
+
+    <ul>
+        {% for number in numbers%}
+            <li>{{ loop.index0 }}) {{ number }}</li>
+        {% endfor %}
+    </ul>
+    {% endblock %} 
+</div>
