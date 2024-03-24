@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <style>
+
+    </style>
+    <body>
+        <div>
+            <h1>{{name}}</h1>
+            <p>Введите количество чисел</p>
+            <form method="POST" action="/">
+                <input type="number" value="{{N}}" name="number" id="" max="519">
+            </form> 
+            <p style="width: 75%">
+                {% for num in nums %}
+                {{num}} &emsp;
+                {% endfor %}
+            </p>
+        </div>
+    </body>
+</html>
