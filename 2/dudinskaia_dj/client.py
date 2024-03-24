@@ -16,3 +16,5 @@ def receive_dna_samples():
 
         for dna in dna_samples:
             logger.info(f"Received DNA sequence: {dna.sequence}")
+
+receive_dna_samples()
