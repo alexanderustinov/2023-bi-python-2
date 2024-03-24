@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Even numbers{% endblock %}
+
+
+{% block body %}
+
+An even number is an integer that is divisible by 2 without remainder. Here we have only positive numbers(from 0 to n)
+
+<form method="POST">
+    <div>
+      <label for="n">Enter number n:</label>
+    <input type="number" id="n" name="n" min="0"  required/>
+    <span class="validity"></span>
+    </div>
+    <div>
+      <input type="submit" />
+    </div>
+  </form>
+<p>Sequence: {{ s }}</p>
+
+{% endblock %}
