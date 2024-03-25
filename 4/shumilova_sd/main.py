@@ -4,8 +4,8 @@ app = Flask(__name__)
 
 def even_numbers(n):
     s = ''
-    for i in range(0, n+1):
-        s += str(i+2)+' '
+    for i in range(0, n*2, 2):
+        s += str(i) + ' '
     return s
 
 @app.route('/', methods=['GET', 'POST'])
