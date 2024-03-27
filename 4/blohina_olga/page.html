@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Факториальная последовательность{% endblock %}
+
+{% block body %}
+<h4>Факториальная последовательность</h4>
+<form action='/show_factorials' method='post'>
+    <label for = 'factorials' class='form-label'>Введите количество элементов факториальной последовательности</label>
+    <hr>
+    <input type='int' class='form-control' id='factorials' name='factorials'>
+</form>
+        <p>
+            {{ error }}
+        </p>
+    <ul>
+        {% for factorial in factorials%}
+            <li>{{ loop.index0 }}) {{ factorial }}</li>
+        {% endfor %}
+    </ul>
+    {% endblock %}
