@@ -12,4 +12,4 @@ with open('World Happiness Report (2022).csv', encoding='utf-8', mode='r') as fi
         for i in data:
             new = Rating(country=i[0], year=i[1], rating=float(i[2]))
             s.add(new)
-            s.commit()
+        s.commit()

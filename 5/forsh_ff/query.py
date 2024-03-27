@@ -15,8 +15,6 @@ with Session(engine) as s:
     print('\n')
 
     # запрос выдает все записи для России, которые относятся к 2007 году
-    # никто никогда не вернет 2007 год :-(
-    # https://www.youtube.com/watch?v=i9Nebj-dVn4
     query_2 = s.execute(
         select(Rating.year, Rating.rating)
         .where(Rating.country == "Russia")
