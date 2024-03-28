@@ -1,20 +1,12 @@
 {% extends 'base.html' %}
-
 {% block title %}Факториальная последовательность{% endblock %}
-
 {% block body %}
 <h4>Факториальная последовательность</h4>
-<form action='/show_factorials' method='post'>
-    <label for = 'factorials' class='form-label'>Введите количество элементов факториальной последовательности</label>
-    <hr>
-    <input type='int' class='form-control' id='factorials' name='factorials'>
+<p>Введите количество элементов факториальной последовательности (n)</p>
+<form method='POST'>
+    <label for='n'>n = </label>
+    <input type='number' id='n' name='n' min='1' required/>
+    <input type='submit'>
 </form>
-        <p>
-            {{ error }}
-        </p>
-    <ul>
-        {% for factorial in factorials%}
-            <li>{{ loop.index0 }}) {{ factorial }}</li>
-        {% endfor %}
-    </ul>
-    {% endblock %}
+<p>Факториалы: {{ sequence }}</p>
+{% endblock %}
