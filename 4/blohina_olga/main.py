@@ -7,20 +7,13 @@ def Factorial(n):
         return 1
     return n * factorial(n-1)
 
-@app.route('/')
+@app.route('/', methods = ['GET','POST'])
 def index():
-    return render_template('page.html')
-
-@app.route('/show_factorials', methods=['POST'])
-def show_factorials():
     if request.method == 'POST':
-        factorial = request.form.get('factorials')
-        try:
-            return render_template('page.html', factorials=Factorial(int(factorial)))
-        except ValueError:
-            return render_template('page.html', error='Пожалуйста, введите натуральное число.')
-    else:
-        return render_template('page.html')
+        n = int(request.form['n'])
+        sequence = Factorial(n)
+        return render_template('index.html', sequence = sequence)
+    return render_template('index.html', sequence = '')
 
-if __name__ == '__main__':
-    app.run()
+app.run(debug = True)
+
