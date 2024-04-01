@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Triangular numbers{% endblock %}
+
+
+{% block body %}
+
+A triangular number counts objects arranged in an equilateral triangle. <br>
+The n<sup>th</sup> triangular number is the number of dots in the triangular arrangement with n dots on each side, <br>
+and is equal to the sum of the n natural numbers from 1 to n.
+
+<form method="POST">
+    <div>
+      <label for="N">Choose your n:</label>
+    <input type="number" id="n" name="n" min="1"  required/>
+    <span class="validity"></span>
+    </div>
+    <div>
+      <input type="submit" />
+    </div>
+</form>
+<p>Result: {{ s }}</p>
+
+{% endblock %}

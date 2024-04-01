@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Fibonacci sequence{% endblock %}
+
+{% block body %}
+<p>Введите натуральное число, чтобы узнать последовательность Фибоначчи, состоящую из заданного числа элементо (включительно)</p>
+
+<form method="POST">
+    <label for="n">Введите число:</label>
+    <input type="number" id="n" name="n" min="1" required/>
+    <input type="submit">
+</form>
+<p>Числа Фибоначчи: {{ sequence }}</p>
+
+{% endblock %}
