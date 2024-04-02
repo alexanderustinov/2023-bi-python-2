@@ -13,6 +13,3 @@ class Deaths(Base):
     entity: Mapped[str] = mapped_column()
     year: Mapped[int] = mapped_column()
     deaths: Mapped[float] = mapped_column()
-
-
-Base.metadata.create_all(engine)
