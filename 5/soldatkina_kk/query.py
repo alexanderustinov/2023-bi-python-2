@@ -7,7 +7,10 @@ with Session(engine) as s:
     res2 = select(Population).order_by(Population.people.asc()).limit(1)
 
     for r in s.scalars(res1):
-        print(f"Первая столица по населению на 2018 год - это {r.entity}. В этом городе насчитывается {r.people} жителей.")
+        print(f"Cтрана, чья столица на первом месте по населению на 2018 год - это {r.entity}. В этом городе насчитывается {r.people} жителей.")
 
     for r in s.scalars(res2):
-        print(f"Последняя столица по населению на 2018 год - это {r.entity}. В этом городе насчитывается {r.people} жителей.")
+        print(f"Cтрана, чья столица на последнем месте по населению на 2018 год - это {r.entity}. В этом городе насчитывается {r.people} жителей.")
+
+
+
