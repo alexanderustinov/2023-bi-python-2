@@ -13,8 +13,6 @@ def main():
         a = s.put(f"{api_base}/add", json=_)
         print(a.text)
 
-    r = s.get(api_base)
-
     star_name = "Sun"
     res = requests.get(f"{api_base}/{star_name}")
     print(f"Your star is {star_name}, and it's distance from the Earth is {res.text}")
