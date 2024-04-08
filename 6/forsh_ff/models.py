@@ -21,4 +21,4 @@ class Rating(SqlAlchemyBase):
         return f'{self.id} --- {self.country} --- {self.year}'
 
 
-SqlAlchemyBase.metadata.create_all(engine)
+SqlAlchemyBase.metadata.create_all(bind=engine)
