@@ -14,17 +14,11 @@ if __name__ == '__main__':
         processes.append(p)
         processes[-1].start()
 
-    f = True # (The Most Hard Part) Долго с этим мучался.
-    while f: # Смог убить их все сразу только так. Иначе они еще живут, или сыпались ошибки.
+    f = True  # (The Most Hard Part) Долго с этим мучался.
+    while f:  # Смог убить их все сразу только так. Иначе они еще живут, или сыпались ошибки.
         for p in processes:
-            if not(p.is_alive()): # Только один нашёл. Тут же убил все.
+            if not (p.is_alive()):  # Только один нашёл. Тут же убил все.
+                f = False
                 for pr in processes:
                     pr.terminate()
-                f = False
-
-
-
-
-
-
 
