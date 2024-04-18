@@ -1,19 +1,21 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect
+import math
 
 app = Flask(__name__)
 
 def Factorial(n):
-    if n == 0:
-        return 1
-    return n * factorial(n-1)
+    for i in range(1, n+1):
+        return [math.factorial(i) for i in range(1, n+1)]
 
-@app.route('/', methods = ['GET','POST'])
-def index():
-    if request.method == 'POST':
-        n = int(request.form['n'])
-        sequence = Factorial(n)
-        return render_template('index.html', sequence = sequence)
-    return render_template('index.html', sequence = '')
+@app.route('/')
+def Redirect_Fact():
+    return redirect('/fact/4')
 
-app.run(debug = True)
 
+@app.route('/fact/<int:n>')
+def Your_Factorials(n):
+    fact = Factorial(n)
+    return f'Вот первые {n} члена(ов) факториальной последовательности: {fact}'
+
+if __name__ == '__main__':
+    app.run(debug=True)
