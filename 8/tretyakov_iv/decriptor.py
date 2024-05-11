@@ -26,7 +26,7 @@ for smn in EVERYONE:
                 label=None
             )
         )
-        data_encoded+=plaintext.decode()
+        data_encoded += plaintext.decode()
     pers_res = jwt.decode(data_encoded, public_key, ['RS512'])
     for i in pers_res:
         print(pers_res[i])
