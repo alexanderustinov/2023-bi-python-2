@@ -1,4 +1,5 @@
 from pickle import load
+from word import key
 
 import jwt
 import openssh_key.private_key_list as pkl
@@ -15,7 +16,7 @@ pk_sk_pair = pkl.PrivateKeyList.from_string(open(home / '.ssh' / 'id_rsa').read(
 private_key = pk_sk_pair[0].private.params.convert_to(rsa.RSAPrivateKey)
 public_key = pk_sk_pair[0].public.params.convert_to(rsa.RSAPublicKey)
 
-where = {"Question" : "Где?", "Answer" : "В цирке"}
+where = {"Question" : "Где?", "Answer" : key}
 
 data_encoded = jwt.encode(where, private_key, 'RS512')
 print(data_encoded)
