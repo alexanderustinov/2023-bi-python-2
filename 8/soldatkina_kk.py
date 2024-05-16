@@ -3,6 +3,7 @@ import openssh_key.private_key_list as pkl
 import cryptography.hazmat.primitives.asymmetric.rsa as rsa
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
+from answer import my_ans
 
 from pathlib import Path
 home = Path.home()
@@ -11,7 +12,7 @@ pk_sk_pair = pkl.PrivateKeyList.from_string(open(home / '.ssh' / 'id_rsa').read(
 private_key = pk_sk_pair[0].private.params.convert_to(rsa.RSAPrivateKey)
 public_key = pk_sk_pair[0].public.params.convert_to(rsa.RSAPublicKey)
 
-my_question = {"Question" : "Что делали?", "Answer" : "Делали домашку по питону"}
+my_question = my_ans
 
 data_encoded = jwt.encode(my_question, private_key, 'RS512')
 print(data_encoded)
