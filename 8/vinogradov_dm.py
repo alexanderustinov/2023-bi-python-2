@@ -3,7 +3,6 @@ import openssh_key.private_key_list as pkl
 import cryptography.hazmat.primitives.asymmetric.rsa as rsa
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
-from pickle import load
 from pathlib import Path
 answer=input("Введите ответ на вопрос:")
 home = Path.home()
