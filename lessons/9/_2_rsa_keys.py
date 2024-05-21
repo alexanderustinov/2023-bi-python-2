@@ -1,5 +1,5 @@
 from pickle import dump
-import cryptography
+
 from cryptography.hazmat.primitives.asymmetric import rsa
 
 private_key = rsa.generate_private_key(
@@ -8,7 +8,7 @@ private_key = rsa.generate_private_key(
 )
 
 public_key = private_key.public_key()
-print(public_key)
+
 
 # pickle does not help - strange rusty object
 
