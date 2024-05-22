@@ -12,7 +12,7 @@ private_key = pk_sk_pair[0].private.params.convert_to(rsa.RSAPrivateKey)
 public_key = pk_sk_pair[0].public.params.convert_to(rsa.RSAPublicKey)
 try:
     from answ import answer
-    question = {"Question" : "Чем все закончилось?", "Answer" : answer}
+    question = answer
 
 
     data_encoded = jwt.encode(question, private_key, 'RS512')
