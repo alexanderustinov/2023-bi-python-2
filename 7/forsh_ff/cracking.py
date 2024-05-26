@@ -1,32 +1,56 @@
+import sys
 from itertools import product 
 from string import ascii_lowercase
 from hashlib import sha3_512
 from multiprocessing import cpu_count, Pool
 
 
-hash_was = 'ec2733518340c350aba3cb7171f952590b71d6c76b2701f88868d238a73f6a8e349e51231be0685ef39f511d40facda09b8009add05f7a079b89d32961297611'
+hash_was = '75d527c368f2efe848ecf6b073a36767800805e9eef2b1857d5f984f036eb6df891d75f72d9b154518c1cd58835286d1da9a38deba3de98b5a53e5ed78a84976'
 
 
-def enumeration_func(gen):
-    word_now = ''.join(gen)
-    hash_now = sha3_512(word_now.encode()).hexdigest()
-    if hash_now == hash_was:
-        print(f"password seems to be '{word_now}'")
-        return word_now
+def enumeration_func(lst):
+    for i in lst:
+        word_now = ''.join(i)
+        hash_now = sha3_512(word_now.encode()).hexdigest()
+        if hash_now == hash_was:
+            return word_now
     return False
 
 
-if __name__ == '__main__':
-    for i in range(8):
-        print('word length:', i + 1)
-        gen = product(ascii_lowercase, repeat=i+1)
-        lst = []
+class Worker():
+    def __init__(self):
+        self.cpu = cpu_count() - 1
+        self.pool = Pool(self.cpu)
+
+    def data(self, step):
+        gen = product(ascii_lowercase, repeat=step + 1)
+        matrix, lst = [], []
+        length = 26 ** (3 + 1)
+        board = length // self.cpu
+        c, k = 1, 1
         for i in gen:
             lst.append(i)
-        with Pool(cpu_count()) as p:
-            res = p.map(enumeration_func, lst)
-            if any(res):
-                p.terminate()
-                break
-    else:
-        print('password not found')
+            if c == board * k:
+                matrix.append(lst)
+                lst = []
+                k += 1
+            c += 1
+        if lst:
+            matrix.append(lst)
+        return matrix
+
+    def main(self):
+        for i in range(8):
+            print('word length:', i + 1)
+            test = self.pool.map(enumeration_func, self.data(i))
+            if any(test):
+                sys.exit()
+        else:
+            print('password not found')
+        self.pool.close()
+        self.pool.join()
+
+
+if __name__ == '__main__':
+    w = Worker()
+    w.main()
