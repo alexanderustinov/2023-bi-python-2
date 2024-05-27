@@ -4,6 +4,10 @@ import sqlalchemy
 from sqlalchemy import Column, Integer, String, create_engine, select
 from sqlalchemy.orm import declarative_base, Session
 
+flag = False
+if (os.path.exists('idk.db')):
+    flag = True
+
 Base = declarative_base()
 
 class AviationAccidents(Base):
@@ -22,11 +26,10 @@ class AviationAccidents(Base):
     Landing_accidents = Column(Integer)
     Landing_fatalities = Column(Integer)
 
-if not(os.path.exists('idk.db')):
-    engine = sqlalchemy.create_engine('sqlite:///idk.db', echo=False)
+engine = sqlalchemy.create_engine('sqlite:///idk.db', echo=False)
 
-    Base.metadata.create_all(engine)
-
+Base.metadata.create_all(engine)
+if flag == False:
     with open('Aviation accidents and fatalities by flight phase (ASN, 2019).csv', encoding='utf-8', mode='r') as file:
         data = csv.reader(file, delimiter=',')
         data.__next__()
@@ -52,13 +55,11 @@ if not(os.path.exists('idk.db')):
 
     Base.metadata.create_all(engine)
 
-    #запрос выдаёт количество смертей при посадке (2 число) за год (1 чилсо)
-    with Session(engine) as sess2:
-        q_1 = sess2.execute(
-            select(AviationAccidents.Year, AviationAccidents.Landing_fatalities)
-            .where(AviationAccidents.Entity == 'World') # -_-
-            .order_by(AviationAccidents.Year.desc()))
-        print(q_1.all())
+#запрос выдаёт количество смертей при посадке (2 число) за год (1 чилсо)
+with Session(engine) as sess2:
+    q_1 = sess2.execute(
+        select(AviationAccidents.Year, AviationAccidents.Landing_fatalities)
+        .where(AviationAccidents.Entity == 'World') # -_-
+        .order_by(AviationAccidents.Year.desc()))
+    print(q_1.all())
 
-else:
-    print("Вы уже всё посмотрели")
