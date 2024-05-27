@@ -6,7 +6,7 @@ from sqlalchemy.orm import declarative_base, Session
 Base = declarative_base()
 
 class AviationAccidents(Base):
-    __tablename__ = 'accidents aviation'
+    __tablename__ = 'Aviation accidents and fatalities by flight phase (ASN, 2019)'
     id = Column(Integer, primary_key=True, autoincrement=True)
     Entity = Column(String)
     Year = Column(Integer)
@@ -22,6 +22,7 @@ class AviationAccidents(Base):
     Landing_fatalities = Column(Integer)
 
 engine = sqlalchemy.create_engine('sqlite:///idk.db', echo=False)
+Base.metadata.create_all(engine)
 
 with open('Aviation accidents and fatalities by flight phase (ASN, 2019).csv', encoding='utf-8', mode='r') as file:
     data = csv.reader(file, delimiter=',')
