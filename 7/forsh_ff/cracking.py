@@ -44,6 +44,7 @@ class Worker():
             print('word length:', i + 1)
             test = self.pool.map(enumeration_func, self.data(i))
             if any(test):
+                print([res for res in test if res][0])
                 sys.exit()
         else:
             print('password not found')
