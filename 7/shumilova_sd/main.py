@@ -1,3 +1,4 @@
+import sys
 from cracking import crack, dict
 from multiprocessing import cpu_count, Process, Value
 
@@ -17,5 +18,4 @@ if __name__ == '__main__':
         for p in processes:
             if not (p.is_alive()):
                 f = False
-                for _ in processes:
-                    _.terminate()
+                sys.exit()
